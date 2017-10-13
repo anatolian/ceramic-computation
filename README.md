@@ -9,19 +9,19 @@ These scripts were written by me, Peter Cobb.  They were written quickly, and al
 ## Organization
 The folders here are organized:
  * 01_include
-  * Scripts that are used by all other folders and processes
+   * Scripts that are used by all other folders and processes
  * 02_digitization
-  * Tracing of the images is done in the open source ImageJ software, with some supporting scripts
+    * Tracing of the images is done in the open source ImageJ software, with some supporting scripts
  * 03_pointfilemanipulation
-  * The ImageJ exports often need some tweaking for standardization
+    * The ImageJ exports often need some tweaking for standardization
  * 04_dbload
-  * Once the point files are ready, they can be loaded into the database
+    * Once the point files are ready, they can be loaded into the database
  * 05_comparison
-  * The main goal is to compare 2d rim profile shapes
+    * The main goal is to compare 2d rim profile shapes
  * 06_otheranalysis
-  * Additional experimental analysis
+    * Additional experimental analysis
  * 10_other
-  * Other utility scripts
+    * Other utility scripts
   
 ## File and Data structures
 As we move through each step of the process in the scripts of the subfolder, the database structure and the file paths used by the scripts will be individually introduced.
