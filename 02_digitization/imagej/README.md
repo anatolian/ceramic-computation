@@ -13,8 +13,7 @@ Before using ImageJ, you should copy the StartupMacros.txt script into the prope
 Here are the steps:
  * open the ImageJ program (Microscope Icon at bottom)
  * Press the button labeled ‘0’, which is located under the ‘Window’ menu.  This button is only used once when the ImageJ program is started, and isn’t used after that.
-    * After this button is pressed, the program will prompt you to open a new file.  We are currently working on the .tif images in this folder:
-    * C:\inetpub\wwwroot\citation\finds
+    * After this button is pressed, the program will prompt you to open a new file.  Look for your .tif file
     * go to that folder if it doesn’t automatically open there
  * Select whichever is the next .tif file for you to work on.  Work on the tif files in order.
  * After the file opens, make sure the ceramic is a rim with a center line.  If not, move to the next file by clicking the ‘N’ button at the top of ImageJ.  Remember that some ceramics that have rims don’t have a center line.
