@@ -1,0 +1,78 @@
+var pencilWidth=1, alt=8;
+   function setColorToBackgound() {
+       setColor("white");
+   }
+
+   function setColorToForeground() {
+       setColor("black");
+   }
+
+   function draw(width) {
+        leftClick=16;
+        //setupUndo(); // requires 1.32g
+        getCursorLoc(x, y, z, flags);
+        setLineWidth(width);
+        moveTo(x,y);
+        x2=-1; y2=-1;
+        while (true) {
+            getCursorLoc(x, y, z, flags);
+            if (flags&leftClick==0) exit();
+            if (x!=x2 || y!=y2)
+                lineTo(x,y);
+            x2=x; y2 =y;
+            wait(10);
+        }
+   }
+
+
+  macro "Pencil ToolA - C059L494f L4990 L90b0 Lc1c3 L82a4 Lb58b L7c4f Lb4b4 L5a5d L6b6c L7b7b" {
+        getCursorLoc(x, y, z, flags);
+       
+              setColorToForeground();
+        draw(pencilWidth);
+   }
+
+macro "Zero Action Tool - C000T3e160" {
+	run("Open...");
+	run("Set Scale...", "distance=29.500 known=1 pixel=1 unit=cm global");
+
+	setTool("rectangle");
+}
+
+
+
+macro "First Action Tool - C000T3e16C" {
+	run("Crop");
+	setTool("zoom");
+}
+
+  macro "Pencil Tool - C059L494f L4990 L90b0 Lc1c3 L82a4 Lb58b L7c4f Lb4b4 L5a5d L6b6c L7b7b" {
+        getCursorLoc(x, y, z, flags);
+        
+              setColorToBackgound();
+        draw(pencilWidth);
+   }
+
+macro "Second Action Tool - C000T3e16L" {
+	run("Area to Line");
+
+	interVal=3;
+	do {
+		if (interVal!=3) { run("Undo"); }
+		run("Interpolate", "interval=&interVal smooth");
+		interVal=getNumber("Enter a interpolation number to try again, or 0 to move on:",0);
+	} while (interVal!=0)
+
+	run("Interpolate", "interval=0.2");
+	run("Fit Spline");
+	setTool("zoom");
+}
+
+macro "Third Action Tool - C000T3e16P" {
+	run("Properties... ", "name=[] position=none stroke=none width=0 list");
+}
+
+macro "Fourth Action Tool - C000T3e16N" {
+	run("Open Next", "  disable_these");
+	setTool("rectangle");
+}

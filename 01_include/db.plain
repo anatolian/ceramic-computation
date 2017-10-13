@@ -1,0 +1,302 @@
+SET search_path = items, pg_catalog;
+
+
+
+CREATE TABLE ceramics_sections (
+    itemid integer NOT NULL,
+    sectionid integer DEFAULT 1 NOT NULL,
+    pointid integer NOT NULL,
+    type character varying(20) DEFAULT 'unknown'::character varying NOT NULL,
+    x_cm numeric(5,3) NOT NULL,
+    y_cm numeric(6,3) NOT NULL
+);
+
+
+CREATE TABLE ceramics_sections_rims_math (
+    itemid integer NOT NULL,
+    sectionid integer NOT NULL,
+    pointid integer NOT NULL,
+    chord_length numeric(6,3),
+    radius_cm numeric(5,3),
+    tangent_rad numeric(5,3),
+    curvature numeric(5,3)
+);
+
+
+CREATE TABLE ceramics_sections_rims_math_compare (
+    itemid1 integer NOT NULL,
+    sectionid1 integer NOT NULL,
+    itemid2 integer NOT NULL,
+    sectionid2 integer NOT NULL,
+    radius_difference_average numeric(5,3),
+    radius_difference_rms numeric(5,3),
+    tangent_difference_average numeric(5,3),
+    tangent_difference_rms numeric(5,3),
+    curvature_difference_average numeric(5,3),
+    curvature_difference_rms numeric(5,3)
+);
+
+
+CREATE TABLE ceramics_sections_rims_math_normalization (
+    itemid integer NOT NULL,
+    sectionid integer NOT NULL,
+    radius_average numeric(5,3),
+    radius_rms numeric(5,3),
+    tangent_average numeric(5,3),
+    tangent_rms numeric(5,3),
+    curvature_average numeric(5,3),
+    curvature_rms numeric(5,3)
+);
+
+
+
+CREATE TABLE ceramics_sections_rims_relationships (
+    itemid1 integer NOT NULL,
+    sectionid1 integer NOT NULL,
+    itemid2 integer NOT NULL,
+    sectionid2 integer NOT NULL,
+    relationship_scale integer
+);
+
+
+
+CREATE TABLE items (
+    itemid integer NOT NULL,
+    subtable character varying(50) NOT NULL,
+    siteid integer NOT NULL,
+    possibly_multiple boolean DEFAULT false NOT NULL
+);
+
+
+
+CREATE TABLE items_attributes_munsell (
+    itemid integer NOT NULL,
+    reading_location character varying(25) NOT NULL,
+    hue character varying(5) NOT NULL,
+    lightness_value numeric(2,1) NOT NULL,
+    chroma numeric(1,0) NOT NULL
+);
+
+
+
+CREATE TABLE items_attributes_numeric (
+    itemid integer NOT NULL,
+    name character varying(25) NOT NULL,
+    value numeric(7,3)
+);
+
+
+
+CREATE TABLE items_attributes_text (
+    itemid integer NOT NULL,
+    name character varying(25) NOT NULL,
+    value character varying(200),
+    uncertainty_note character varying(250) DEFAULT ''::character varying NOT NULL
+);
+
+
+CREATE TABLE items_disabled (
+    itemid integer NOT NULL,
+    comment character varying(100) NOT NULL
+);
+
+
+CREATE TABLE items_figures (
+    itemid integer NOT NULL,
+    citation character varying(200) NOT NULL,
+    figureid character varying(25) NOT NULL,
+    "primary" boolean DEFAULT false NOT NULL,
+    drawing boolean DEFAULT false NOT NULL,
+    height integer,
+    width integer,
+    dots_per_inch integer
+);
+
+
+
+CREATE TABLE items_in_process (
+    itemid integer NOT NULL
+);
+
+
+CREATE TABLE sites (
+    siteid integer NOT NULL,
+    site_name character varying(100),
+    alternate_site_name_1 character varying(100),
+    alternate_site_name_2 character varying(100),
+    comments text,
+    longitude double precision,
+    latitude double precision,
+    accuracy_meters integer
+);
+
+
+
+CREATE TABLE sites_stratigraphy_order (
+    siteid integer NOT NULL,
+    stratigraphy_local character varying(100) NOT NULL,
+    order_by integer,
+    synch_level integer,
+    category character varying(5)
+);
+
+
+SET search_path = publications, pg_catalog;
+
+
+CREATE TABLE "references" (
+    citation character varying(100) NOT NULL,
+    openlibrary_id character varying(20),
+    oclc_id integer,
+    full_text_link character varying(250),
+    doi character varying(50),
+    description character varying(200),
+    first_page integer
+);
+
+
+SET search_path = items, pg_catalog;
+
+
+ALTER TABLE ONLY items_attributes_numeric
+    ADD CONSTRAINT ceramics_numeric_properities_pkey PRIMARY KEY (itemid, name);
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math_compare
+    ADD CONSTRAINT ceramics_sections_rims_math_compare_pkey PRIMARY KEY (itemid1, sectionid1, itemid2, sectionid2);
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math_normalization
+    ADD CONSTRAINT ceramics_sections_rims_math_normalization_pkey PRIMARY KEY (itemid, sectionid);
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math
+    ADD CONSTRAINT ceramics_sections_rims_math_pkey PRIMARY KEY (itemid, sectionid, pointid);
+
+
+ALTER TABLE ONLY ceramics_sections_rims_relationships
+    ADD CONSTRAINT ceramics_sections_rims_relationships_item_pair_unique UNIQUE (itemid1, sectionid1, itemid2, sectionid2);
+
+
+ALTER TABLE ONLY ceramics_sections_rims_relationships
+    ADD CONSTRAINT ceramics_sections_rims_relationships_pkey PRIMARY KEY (itemid1, sectionid1, itemid2, sectionid2);
+
+
+ALTER TABLE ONLY items_attributes_munsell
+    ADD CONSTRAINT items_attributes_munsell_pkey PRIMARY KEY (itemid, reading_location, hue, lightness_value, chroma);
+
+
+ALTER TABLE ONLY items_attributes_munsell
+    ADD CONSTRAINT items_attributes_munsell_readling_location_unique UNIQUE (itemid, reading_location);
+
+
+ALTER TABLE ONLY items_attributes_text
+    ADD CONSTRAINT items_attributes_text_pkey PRIMARY KEY (itemid, name);
+
+
+ALTER TABLE ONLY ceramics_sections
+    ADD CONSTRAINT items_ceramics_sections_pkey PRIMARY KEY (itemid, sectionid, pointid);
+
+
+ALTER TABLE ONLY ceramics_sections
+    ADD CONSTRAINT items_ceramics_sections_x_y_unique UNIQUE (itemid, sectionid, x_cm, y_cm);
+
+
+ALTER TABLE ONLY items_disabled
+    ADD CONSTRAINT items_disabled_pkey PRIMARY KEY (itemid);
+
+
+ALTER TABLE ONLY items_figures
+    ADD CONSTRAINT items_figures_pkey PRIMARY KEY (itemid, citation, figureid);
+
+
+ALTER TABLE ONLY items_in_process
+    ADD CONSTRAINT items_in_process_pkey PRIMARY KEY (itemid);
+
+
+ALTER TABLE ONLY items
+    ADD CONSTRAINT items_pkey PRIMARY KEY (itemid);
+
+
+ALTER TABLE ONLY sites
+    ADD CONSTRAINT sites_pkey PRIMARY KEY (siteid);
+
+
+ALTER TABLE ONLY sites_stratigraphy_order
+    ADD CONSTRAINT sites_stratigraphy_order_pkey PRIMARY KEY (siteid, stratigraphy_local);
+
+
+SET search_path = publications, pg_catalog;
+
+ALTER TABLE ONLY "references"
+    ADD CONSTRAINT references_pkey PRIMARY KEY (citation);
+
+
+SET search_path = items, pg_catalog;
+
+ALTER TABLE ONLY items_attributes_numeric
+    ADD CONSTRAINT ceramics_numeric_properities_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+ALTER TABLE ONLY ceramics_sections_rims_math
+    ADD CONSTRAINT ceramics_sections_rims_math_ceramics_sections_fkey FOREIGN KEY (itemid, sectionid, pointid) REFERENCES ceramics_sections(itemid, sectionid, pointid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math_compare
+    ADD CONSTRAINT ceramics_sections_rims_math_compare_items1_fkey FOREIGN KEY (itemid1) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math_compare
+    ADD CONSTRAINT ceramics_sections_rims_math_compare_items2_fkey FOREIGN KEY (itemid2) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections_rims_math_normalization
+    ADD CONSTRAINT ceramics_sections_rims_math_normalization_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections_rims_relationships
+    ADD CONSTRAINT ceramics_sections_rims_relationships_rims_normal1 FOREIGN KEY (itemid1, sectionid1) REFERENCES ceramics_sections_rims_math_normalization(itemid, sectionid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections_rims_relationships
+    ADD CONSTRAINT ceramics_sections_rims_relationships_rims_normal2 FOREIGN KEY (itemid2, sectionid2) REFERENCES ceramics_sections_rims_math_normalization(itemid, sectionid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_attributes_munsell
+    ADD CONSTRAINT items_attributes_munsell_munsell_colors_fkey FOREIGN KEY (hue, lightness_value, chroma) REFERENCES options.munsell_colors(hue, lightness_value, chroma) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+
+ALTER TABLE ONLY items_attributes_munsell
+    ADD CONSTRAINT items_attributes_munsell_reading_locations_fkey FOREIGN KEY (reading_location) REFERENCES options.munsell_color_reading_locations(reading_location) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_attributes_text
+    ADD CONSTRAINT items_attributes_text_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY ceramics_sections
+    ADD CONSTRAINT items_ceramics_sections_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_disabled
+    ADD CONSTRAINT items_disabled_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_figures
+    ADD CONSTRAINT items_figures_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_figures
+    ADD CONSTRAINT items_figures_references_fkey FOREIGN KEY (citation) REFERENCES publications."references"(citation) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items_in_process
+    ADD CONSTRAINT items_in_process_items_fkey FOREIGN KEY (itemid) REFERENCES items(itemid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY items
+    ADD CONSTRAINT items_sites_fkey FOREIGN KEY (siteid) REFERENCES sites(siteid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE ONLY sites_stratigraphy_order
+    ADD CONSTRAINT sites_stratigraphy_order_sites_fkey FOREIGN KEY (siteid) REFERENCES sites(siteid) MATCH FULL ON UPDATE RESTRICT ON DELETE RESTRICT;
