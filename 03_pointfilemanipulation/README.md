@@ -8,8 +8,8 @@ The checkOutlinesFromDB.R script functions similar to the previous script, but g
 
 The following scripts can be used alone, but also have been added into the checkOutline script for quicker use.
 
-reversePoints.R - The order of the points is important, it should always been from bottom outside surface to bottom inside surface.  Sometimes ImageJ exports in the other direction, so this script can fix that.
+reversePoints.R - The order of the points is important, it should always be from bottom outside surface to bottom inside surface.  Sometimes ImageJ exports in the other direction, so this script can fix that.
 
 diameterShift.R - For drawings where the radius was unknown, we want to shift the points so the leftmost point is at 0 for X.  There may also be other reasons for shifting the points along the x-axis.
 
-subsetPoints.R - The calculations work out best when each section is represented by a similar amount of points.  If ImageJ creates too many points, we can simply interpolate and merge nearby points.
+subsetPoints.R - The calculations work out best when each section is represented by a similar amount of points.  If ImageJ creates too many points, we can simply remove points at some standard interval.
