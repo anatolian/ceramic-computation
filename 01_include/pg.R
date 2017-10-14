@@ -1,7 +1,7 @@
 # helper functions for interacting with the database, all SQL code is located in this file, abstracted from other scripts
 
 # the .config file contains the database authentication parameters, which need to be updated for each specific situation
-source(".config")
+source("../01_include/.config")
 library("RPostgreSQL")
 
 # do the actual connect to the db that will be used in all subsequent scripts
