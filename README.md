@@ -22,7 +22,9 @@ The folders here are organized:
     * Additional experimental analysis
  * 10_other
     * Other utility scripts
-  
+ 
+Note that the folder structure assumes that the current working directory for R should be set to the root folder.
+ 
 ## File and Data structures
 As we move through each step of the process in the scripts of the subfolders, the database structure and the file paths used by the scripts will be individually introduced.
 
