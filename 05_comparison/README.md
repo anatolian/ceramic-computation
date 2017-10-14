@@ -1,8 +1,8 @@
 # Comparison of Profiles
 
-This folder contains scripts to use math-based functions to quantitatively compare profile drawings.
+This folder contains scripts to use mathematical functions to quantitatively compare profile drawings.
 
-The compareceramics.R script loops through the ceramic sections in the database and uses the three math models of the sections already computed and stored in the database.  It compares each individual sherd to every other individual sherd, and calculates a quantity that represents difference between the two samples.  In this way, one can start to track and organize sherds by shape.
+The compareceramics.R script loops through the ceramic sections in the database and uses the three math models of the sections already computed and stored in the database.  It compares each individual sherd to every other individual sherd, and calculates a quantity that represents difference between the two samples.  In this way, one can start to track and organize sherds by closeness of shape.
 
 The comparehelper.R script abstracts some of the calculations from the program control of the main script.
 

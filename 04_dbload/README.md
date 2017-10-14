@@ -4,4 +4,4 @@ The files in this folder take the .csv files that model the sections and were cr
 
 Most of the work of loading the files is done using the loadceramics.R and loadhelper.R scripts.
 
-The figureDPI.R and figureMetadata.R scripts allow us to store additional information about the profile drawing files.  These scripts use the command line image processing software ImageMagick, open source software that can be downloaded from the internet.
+The figureDPI.R and figureMetadata.R scripts allow us to store additional information about the profile drawing files.  These scripts use the command line image processing software ImageMagick, open source software that can be downloaded from the internet.  https://www.imagemagick.org/
