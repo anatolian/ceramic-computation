@@ -1,6 +1,6 @@
 # shifts the x values so that the leftmost point gets an x value of 0, and everything else lines up with that.
 # The purpose is to work with rim drawings without a radius
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 fullPath<- rimRadiusPointsPath
 #fullPath<- rimNoRadiusPointsPath

@@ -1,5 +1,5 @@
 # sometimes the ImageJ process creates too dense a set of points, this removes every so many points in order to thin out the dataset
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 fullPath<-rimNoRadiusPointsPath
 

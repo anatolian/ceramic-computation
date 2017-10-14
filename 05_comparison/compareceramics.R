@@ -1,5 +1,5 @@
 # This script loops through a subset of the ceramic sections in the database and compares each section to every other section
-source("../01_include/pg.R")
+source("01_include/pg.R")
 source("comparehelper.R")
 
 # We can constrain the itemids that are processed, this allows partial processing of the dataset

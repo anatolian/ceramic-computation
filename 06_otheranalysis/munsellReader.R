@@ -5,8 +5,8 @@ library(jpeg)
 library(raster)
 library(munsell)
 
-source("../01_include/pg.R")
-source("../01_include/subfolder.R")
+source("01_include/pg.R")
+source("01_include/subfolder.R")
 
 #rgb2munsell <- read.table(paste(collectionsBasePath,"rgbmunsell.csv",sep=""), header=TRUE,sep=",")
 #rgb2munsell2 <- read.table(paste(collectionsBasePath,"rgbmunsell2.csv",sep=""), header=TRUE,sep=",")

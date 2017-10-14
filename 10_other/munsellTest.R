@@ -1,5 +1,5 @@
 # A simple script to view colors
-source("../01_include/pg.R")
+source("01_include/pg.R")
 
 hue_shades<-GetMunsellByHue("N")
 

@@ -1,6 +1,6 @@
 # This prepares the drawing image files for web display by recording in the database the properties such as image dimensions
 # depends on an install of the ImageMagick command line tools
-source("../01_include/pg.R")
+source("01_include/pg.R")
 
 # we can load image files directly from a webserver and saves it locally
 fetchImage <- function(url) {

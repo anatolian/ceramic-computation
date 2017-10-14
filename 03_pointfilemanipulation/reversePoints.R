@@ -1,5 +1,5 @@
 # sometimes the ImageJ process accidentally orders the points from interior to exterior, so this script corrects for that
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 mainPath<-rimRadiusPointsPath
 

@@ -1,7 +1,7 @@
 # This is a special script that takes the eps export from p3d and extracts the x, y coordinates for the profile drawing
 library("jpeg")
 library("grImport")
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 # loop through the 3d scans folder, the eps is always put in the same place in the folder hiearchy by p3d
 dirList <- list.dirs(path=scanBasePath, full.names=FALSE, recursive=FALSE)

@@ -3,7 +3,7 @@
 # The 3d scans were processed by the p3d software to output a tiff profile drawing.  The p3d software creates
 # subfolders within its folder hierarchy depending on the part of the vessel - sherds without a rim or with a handle are also dealt with here,
 # but the default is just a plain rim sherd.
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 # This script will process an entire collection folder, after p3d has been run on all sherds.  Each sherd is a subfolder based on its itemid.
 dirList <- list.dirs(path=scanBasePath, full.names=FALSE, recursive=FALSE)

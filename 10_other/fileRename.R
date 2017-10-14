@@ -1,5 +1,5 @@
 # A simple script to do renaming tasks on the image files
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 extension<-".csv"
 #mainPath<- collectionsImageBasePath

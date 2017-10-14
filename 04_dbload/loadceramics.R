@@ -1,9 +1,9 @@
 library(tiff)
 # simple script to do basic y-normalization on the points from the csv files and load them into the database
 
-source("../01_include/pg.R")
+source("01_include/pg.R")
 source("loadhelper.R")
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 # are we loading the .csv files from drawings with radii or not?
 rimRadius<-F

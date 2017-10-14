@@ -5,7 +5,7 @@
 # is green so the direction of the dots is clear.  Move to the next image by clicking anywhere below 0 on the y axis.
 library(tiff)
 
-source("../01_include/subfolder.R")
+source("01_include/subfolder.R")
 
 mainPath<-imageBasePath
 print(mainPath)

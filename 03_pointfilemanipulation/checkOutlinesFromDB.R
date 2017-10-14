@@ -1,7 +1,7 @@
 # this script functions similar to checkOutlines.R, but gets the list of images to check from the database.
 # this script has not been fully updated recently, and really should be combined with the previous script
 library(tiff)
-source("../01_include/pg.R")
+source("01_include/pg.R")
 
 #dbGetQuery(pgconnect,"SET client_encoding = 'windows-1252'")
 basePath<-"C:/inetpub/wwwroot/"

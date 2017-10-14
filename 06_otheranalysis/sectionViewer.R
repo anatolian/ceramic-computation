@@ -1,6 +1,6 @@
 #produces a simple list of the ceramic sections stored in the database
 
-source("../01_include/pg.R")
+source("01_include/pg.R")
 
 ceramicSectionList <- GetCeramicSectionList()
 ceramicSections <- GetCeramicSection()
