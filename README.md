@@ -32,9 +32,9 @@ At a high level, there are two ways data are organized, the publication or the c
 
 Within the database, the main tables are items, sites, and ceramic_sections.
 
-The items table is a list of all of the individual ceramic sherds, each uniquely identified by an itemid, this number is also used to name image files on the filesystem.  Each item, whether from publication or collection, is from a site, and has an associated siteid.
+The items table is a list of all of the individual ceramic sherds, each uniquely identified by an itemid, this number can sometimes be used to name image files on the filesystem.  Each item, whether from publication or collection, is from a site, and has an associated siteid.
 
-A subtable of the items table is the items_figures table.  Within this table, the identifier figureid is unique per citation (ie per publication), and just identifies the drawing or photograph in that publication.  An individual itemid can have multiple figureid's and be illustrated in multiple publications.
+A subtable of the items table is the items_figures table.  Within this table, the identifier figureid is unique per citation (ie per publication), and just identifies the drawing or photograph in that publication.  An individual itemid can have multiple figureid's and be illustrated in multiple publications.  File names for each image are usually dependent upon the figureid.
 
 The sites table listed all of the sites, each identified by a unique siteid.  The latitude and longitude of the center of each site is also stored in this table for mapping.
 
